@@ -8,6 +8,28 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
 
+var catalogRouter = require('./routes/catalog'); //Import routes for "catalog" area of site
+var compression = require('compression');
+
+// Create the Express application object
+var app = express();
+
+app.use(compression()); //Compress all routes
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
+
+var compression = require('compression');
+var helmet = require('helmet');
+
+// Create the Express application object
+var app = express();
+
+app.use(helmet());
+
 var app = express();
 var mongoose = require('mongoose');
 
